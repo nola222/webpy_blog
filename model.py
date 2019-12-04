@@ -27,9 +27,26 @@ def get_posts():
     """获取所有博客
 
     Returns:
+        obj: posts
 
     """
     return db.select("blog_entries", order="id DESC")
+
+
+def get_post(id):
+    """获取一篇博客
+
+    Args:
+        id (int):  博客id
+
+    Returns:
+        obj: post
+
+    """
+    try:
+        return db.select("blog_entries", where="id=$id", vars=locals())[0]
+    except IndexError:
+        return None
 
 
 def new_post(title, text):

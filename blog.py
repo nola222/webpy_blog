@@ -16,6 +16,7 @@ import web
 urls = (
     "/", "Index",  # 首页
     "/new", "New",  # 新增页
+    "/view/(\d+)", "View",  # 查看页
 )
 
 # Templates
@@ -69,6 +70,23 @@ class New:
             return render.new(form)
         model.new_post(form.d.title, form.d.content)
         raise web.seeother("/")
+
+
+class View:
+    """查看博客类
+
+    """
+    def GET(self, id):
+        """查看一篇博客
+
+        Args:
+            id (int): 博客id
+
+        Returns:
+
+        """
+        post = model.get_post(id)
+        return render.view(post)
 
 
 app = web.application(urls, globals())  # 使用上面列出的url创建一个应用程序，在url对应命名空间查找该类
