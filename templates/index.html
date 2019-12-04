@@ -1,0 +1,11 @@
+$def with (posts)
+
+<h1>Blog posts</h1>
+
+<ul>
+    $for post in posts:
+    <li>
+        <a href="#">$post.title</a>
+        from $datestr(post.posted_on)
+    </li>
+</ul>
