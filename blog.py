@@ -14,8 +14,8 @@ import web
 
 # Urls Configuration
 urls = (
-    "/",
-    "Index",  # 首页
+    "/", "Index",  # 首页
+    "/new", "New",  # 新增页
 )
 
 # Templates
@@ -35,6 +35,40 @@ class Index:
         """
         posts = model.get_posts()
         return render.index(posts)  # index为首页index.html名称
+
+
+class New:
+    """添加处理类
+
+    """
+    form = web.form.Form(
+        web.form.Textbox("title", web.form.notnull, size=30, description="Post title:"),
+        web.form.Textarea(
+            "content", web.form.notnull, rows=30, cols=80, description="Post content:"
+        ),
+        web.form.Button("Post entry"),
+    )
+
+    def GET(self):
+        """获取表单
+
+        Returns:
+
+        """
+        form = self.form()  # 调用Form类__call__返回form
+        return render.new(form)  # new --> new.html新增页
+
+    def POST(self):
+        """提交表单
+
+        Returns:
+
+        """
+        form = self.form()
+        if not form.validates():
+            return render.new(form)
+        model.new_post(form.d.title, form.d.content)
+        raise web.seeother("/")
 
 
 app = web.application(urls, globals())  # 使用上面列出的url创建一个应用程序，在url对应命名空间查找该类
