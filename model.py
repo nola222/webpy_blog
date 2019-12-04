@@ -9,6 +9,7 @@
 重要说明:
 """
 
+import datetime
 import web
 
 import config
@@ -28,4 +29,19 @@ def get_posts():
     Returns:
 
     """
-    return db.select("entries", order="id DESC")
+    return db.select("blog_entries", order="id DESC")
+
+
+def new_post(title, text):
+    """新增一篇博客
+
+    Args:
+        title (str): 博客标题
+        text (str):  博客内容
+
+    Returns:
+
+    """
+    db.insert(
+        "blog_entries", title=title, content=text, posted_on=datetime.datetime.utcnow()
+    )
