@@ -62,3 +62,17 @@ def new_post(title, text):
     db.insert(
         "blog_entries", title=title, content=text, posted_on=datetime.datetime.utcnow()
     )
+
+
+def update_post(id, title, text):
+    """更新一篇博客
+
+    Args:
+        id (int):  博客id
+        title (str): 博客标题
+        text (str):  博客内容
+
+    Returns:
+
+    """
+    db.update("blog_entries", where="id=$id", vars=locals(), title=title, content=text)  # 使用id是区分内建id()，使用vars=locals()

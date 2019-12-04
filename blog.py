@@ -17,6 +17,7 @@ urls = (
     "/", "Index",  # 首页
     "/new", "New",  # 新增页
     "/view/(\d+)", "View",  # 查看页
+    "/edit/(\d+)", "Edit",  # 编辑页
 )
 
 # Templates
@@ -85,8 +86,43 @@ class View:
         Returns:
 
         """
-        post = model.get_post(id)
+        post = model.get_post(int(id))
         return render.view(post)
+
+
+class Edit:
+    """编辑博客类
+
+    """
+    def GET(self, id):
+        """编辑博客
+
+        Args:
+            id (int): 博客id
+
+        Returns:
+
+        """
+        post = model.get_post(int(id))
+        form = New.form()
+        form.fill(post)
+        return render.edit(post, form)
+
+    def POST(self, id):
+        """提交博客
+
+        Args:
+            id (int): 博客id:
+
+        Returns:
+
+        """
+        form = New.form()
+        post = model.get_post(int(id))
+        if not form.validates():
+            return render.edit(post, form)
+        model.update_post(id, form.d.title, form.d.content)
+        raise web.seeother("/")
 
 
 app = web.application(urls, globals())  # 使用上面列出的url创建一个应用程序，在url对应命名空间查找该类
