@@ -76,3 +76,15 @@ def update_post(id, title, text):
 
     """
     db.update("blog_entries", where="id=$id", vars=locals(), title=title, content=text)  # 使用id是区分内建id()，使用vars=locals()
+
+
+def delete_post(id):
+    """删除一篇博客
+
+    Args:
+        id(int):  博客id
+
+    Returns:
+
+    """
+    db.delete("blog_entries", where="id=$id", vars=locals())

@@ -15,9 +15,10 @@ import web
 # Urls Configuration
 urls = (
     "/", "Index",  # 首页
-    "/new", "New",  # 新增页
-    "/view/(\d+)", "View",  # 查看页
-    "/edit/(\d+)", "Edit",  # 编辑页
+    "/new", "New",  # 新增博客
+    "/view/(\d+)", "View",  # 查看博客
+    "/edit/(\d+)", "Edit",  # 编辑博客
+    "/delete/(\d+)", "Delete",  # 删除博客
 )
 
 # Templates
@@ -112,7 +113,7 @@ class Edit:
         """提交博客
 
         Args:
-            id (int): 博客id:
+            id (int): 博客id
 
         Returns:
 
@@ -122,6 +123,23 @@ class Edit:
         if not form.validates():
             return render.edit(post, form)
         model.update_post(id, form.d.title, form.d.content)
+        raise web.seeother("/")
+
+
+class Delete:
+    """删除博客类
+
+    """
+    def POST(self, id):
+        """提交博客
+
+        Args:
+            id (int): 博客id
+
+        Returns:
+
+        """
+        model.delete_post(int(id))
         raise web.seeother("/")
 
 
