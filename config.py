@@ -9,9 +9,9 @@
 重要说明:
 """
 
-DBN = "mysql",
-HOST = "127.0.0.1",
-PORT = 3306,
-USER = "root",
-PW = "root",
+DBN = "mysql"
+HOST = "127.0.0.1"
+PORT = 3306
+USER = "root"
+PW = "root"
 DB = "blog"
