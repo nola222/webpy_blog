@@ -1,0 +1,7 @@
+cheroot==8.2.1
+jaraco.functools==2.0
+Markdown==3.1.1
+more-itertools==8.0.0
+PyMySQL==0.9.3
+six==1.13.0
+web.py==0.40
