@@ -1,4 +1,4 @@
-CREATE TABLE `blog`.`entries` (
+CREATE TABLE `blog`.`blog_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `title` tinytext NOT NULL COMMENT '博客标题',
   `content` text NOT NULL COMMENT '博客内容',
